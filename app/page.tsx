@@ -1,9 +1,60 @@
 import Header from "@/components/Header";
 import Image from "next/image";
+import Link from "next/link";
+import { serialize } from "v8";
+
+const SEARCHES = [
+  {
+    id: 1,
+    term: "Monitors over $500",
+    url: "/search/monitors?sort_by=r&min_price=500",
+    color: "bg-blue-500",
+  },
+  {
+    id: 2,
+    term: "Iphone 14 Pro Max",
+    url: "/search/iphone 14 pro max",
+    color: "bg-red-500",
+  },
+  {
+    id: 3,
+    term: "Macbook Pro",
+    url: "/search/macbook",
+    color: "bg-yellow-500",
+  },
+  {
+    id: 4,
+    term: "Airpods Pro",
+    url: "/search/airpods",
+    color: "bg-green-500",
+  },
+  {
+    id: 5,
+    term: "Tablets Under $300",
+    url: "/search/tablets?sort_by=r&max_price=300",
+    color: "bg-purple-500",
+  },
+];
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    </main>
+    <div className="p-10 pt-0 text-center md:text-left">
+      <h1 className="text=3xl font-extralight mb-5">
+        Are you looking for amazing products with best quality and cheap prices
+      </h1>
+      <h2 className="mb-5">Type the item you want above and Voila! </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center items-center gap-5 mt-5">
+        {SEARCHES.map((search) => (
+          <Link
+            prefetch={false}
+            key={search.id}
+            href={search.url}
+            className={`${search.color} w-full h-36 hover:opacity-50 text-white font-bold py-2 px-4 rounded `}
+          >
+            {search.term}
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
